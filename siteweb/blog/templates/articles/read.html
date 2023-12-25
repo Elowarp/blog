@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +11,19 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>{{ article.title }}</h1>
+    <div class="container px-5 py-4 fs-5" style="max-width: 50rem;">
+        <h1 class="text-center fw-bold mb-4">{{ article.title }}</h1>
+        <h5 class="text-center">{{ article.pub_date|date:'d N Y' }}</h5>
 
-        <img src="{{MEDIA_URL}}{{ article.banner }}" width="250px" height="250px">
+        <div class="row">
+            <img class="mx-auto mb-4" src="{{MEDIA_URL}}{{ article.banner }}" style="max-width: 15em">
+        </div>
 
-        <div id="article">{{ article.text }}</div>
+        <div id="article" class="row">{{ article.text }}</div>
+
+        <div class="row mt-2">
+            <a href="/blog">Go back home</a>
+        </div>
     </div>
 </body>
 

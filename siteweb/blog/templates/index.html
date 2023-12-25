@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +8,48 @@
     <title>Elowan</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container px-5 pt-4 fs-5" style="max-width: 50rem;">
+        <h1 class="text-center fw-bold">Elo's blog</h1>
+        <div class="row border-bottom">
+            <p>Description...</p>
+        </div>
+
         {% if articles %}
         <div>
-            <ul>
             {% for article in articles %}
-                <li>
-                    <a href="{% url 'read_article' article.slug_name %}">{{ article.title }}</a>
-                    <p>{{ article.summup }}</p>
-                </li>
+                <div class="row my-3">
+                    <div class="col-8">
+                        <a href="{% url 'read_article' article.slug_name %}">{{ article.title }}</a>
+                        <p>{{ article.summup }}</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="{{ MEDIA_URL }}{{ article.banner }}" class="img-thumbnail" alt="{{ article.title }}">
+                    </div>
+                <div>
             {% endfor %}
-            </ul>
         </div>
         {% else %}
         <div>
             <p>Aucun article disponible.</p>
         </div>
         {% endif %}
+
+        <div class="row">
+            <div class="col-3">
+                <button id="btnSwitch" type="button" class="btn btn-secondary">Switch mode</button>
+            </div>
+        </div>
     </div>
 
 </body>
-
+<script>
+    document.getElementById('btnSwitch').addEventListener('click',()=>{
+    if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+        document.documentElement.setAttribute('data-bs-theme','light')
+    }
+    else {
+        document.documentElement.setAttribute('data-bs-theme','dark')
+    }
+})
+</script>
 </html>
